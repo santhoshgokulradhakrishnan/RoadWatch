@@ -26,4 +26,63 @@ public class PotholeController {
         return potholeRepository.findAll();
     }
 
+    @GetMapping("/{id}")
+    public Pothole getPotholeById(@PathVariable Long id) {
+
+        return potholeRepository.findById(id).orElse(null);
+
+    }
+
+    @DeleteMapping("/{id}")
+    public String deletePothole(@PathVariable Long id) {
+
+        potholeRepository.deleteById(id);
+
+        return "Pothole deleted successfully";
+
+    }
+
+    @PutMapping("/{id}")
+    public Pothole updatePothole(
+            @PathVariable Long id,
+            @RequestBody Pothole updatedPothole) {
+
+        Pothole pothole = potholeRepository.findById(id).orElse(null);
+
+        if (pothole == null) {
+            return null;
+        }
+
+        pothole.setDescription(updatedPothole.getDescription());
+        pothole.setRoadName(updatedPothole.getRoadName());
+        pothole.setSeverity(updatedPothole.getSeverity());
+        pothole.setStatus(updatedPothole.getStatus());
+
+        return potholeRepository.save(pothole);
+    }
+
+    @PutMapping("/{id}/status")
+    public Pothole updateStatus(
+            @PathVariable Long id,
+            @RequestParam String status) {
+
+        Pothole pothole =
+                potholeRepository.findById(id).orElse(null);
+
+        if(pothole == null){
+            return null;
+        }
+
+        pothole.setStatus(status);
+
+        return potholeRepository.save(pothole);
+    }
+
+    @GetMapping("/status/{status}")
+    public List<Pothole> getPotholesByStatus(
+            @PathVariable String status) {
+
+        return potholeRepository.findByStatus(status);
+    }
+
 }
