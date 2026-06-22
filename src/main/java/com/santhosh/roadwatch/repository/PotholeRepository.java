@@ -8,4 +8,6 @@ public interface PotholeRepository extends JpaRepository<Pothole, Long> {
 
     List<Pothole> findByStatus(String status);
 
+    List<Pothole> findAllByOrderByVotesDesc();
+
 }

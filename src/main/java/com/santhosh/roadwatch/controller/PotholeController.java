@@ -96,4 +96,9 @@ public class PotholeController {
         return potholeRepository.save(pothole);
     }
 
+    @GetMapping("/top")
+    public List<Pothole> getTopPotholes() {
+        return potholeRepository.findAllByOrderByVotesDesc();
+    }
+
 }
