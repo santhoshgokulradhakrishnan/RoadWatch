@@ -85,4 +85,15 @@ public class PotholeController {
         return potholeRepository.findByStatus(status);
     }
 
+    @PutMapping("/{id}/vote")
+    public Pothole votePothole(@PathVariable Long id) {
+
+        Pothole pothole =
+                potholeRepository.findById(id).orElseThrow();
+
+        pothole.setVotes(pothole.getVotes() + 1);
+
+        return potholeRepository.save(pothole);
+    }
+
 }

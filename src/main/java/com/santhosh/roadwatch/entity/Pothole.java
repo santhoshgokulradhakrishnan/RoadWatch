@@ -22,4 +22,7 @@ public class Pothole {
     private String severity;
 
     private String status;
+
+    private int votes;
+
 }
