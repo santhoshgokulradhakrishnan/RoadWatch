@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>RoadWatch</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+    <h1>🚧 RoadWatch</h1>
+
+    <div class="form-card">
+
+        <h2>Report Pothole</h2>
+
+        <input id="roadName" placeholder="Road Name">
+
+        <textarea
+                id="description"
+                placeholder="Description">
+        </textarea>
+
+        <select id="severity">
+            <option>LOW</option>
+            <option>MEDIUM</option>
+            <option>HIGH</option>
+        </select>
+
+        <button onclick="reportPothole()">
+            Report
+        </button>
+
+    </div>
+
+    <h2>Reported Potholes</h2>
+
+    <div id="potholeList"></div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
