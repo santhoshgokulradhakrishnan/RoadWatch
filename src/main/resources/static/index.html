@@ -1,24 +1,62 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RoadWatch</title>
-    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet" href="/style.css">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+
 </head>
+
 <body>
 
 <div class="container">
 
     <h1>🚧 RoadWatch</h1>
 
+    <p style="text-align:center;margin-bottom:30px;color:gray;">
+        Report potholes. Improve roads. Help your city.
+    </p>
+
+    <!-- DASHBOARD -->
+
+    <div class="stats">
+
+        <div class="stat-card">
+            <h2 id="totalReports">0</h2>
+            <p>Total Reports</p>
+        </div>
+
+        <div class="stat-card">
+            <h2 id="reportedCount">0</h2>
+            <p>Pending</p>
+        </div>
+
+        <div class="stat-card">
+            <h2 id="fixedCount">0</h2>
+            <p>Fixed</p>
+        </div>
+
+    </div>
+
+    <!-- REPORT FORM -->
+
     <div class="form-card">
 
         <h2>Report Pothole</h2>
 
-        <input id="roadName" placeholder="Road Name">
+        <input
+                id="roadName"
+                placeholder="Road Name">
 
         <textarea
                 id="description"
-                placeholder="Description">
+                placeholder="Describe the pothole"
+                rows="4">
         </textarea>
 
         <select id="severity">
@@ -27,19 +65,41 @@
             <option>HIGH</option>
         </select>
 
+        <input
+                type="file"
+                id="imageFile"
+                accept="image/*">
+
+        <button onclick="getLocation()">
+            📍 Get Current Location
+        </button>
+
+        <p id="locationText"></p>
+
+        <br>
+
         <button onclick="reportPothole()">
-            Report
+            🚀 Report Pothole
         </button>
 
     </div>
 
-    <h2>Reported Potholes</h2>
+    <!-- LIST -->
+
+    <h2>🗺️ Pothole Map</h2>
+
+    <div id="map"></div>
+
+    <h2 style="margin-bottom:20px;">
+        Reported Potholes
+    </h2>
 
     <div id="potholeList"></div>
 
 </div>
 
-<script src="script.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="/script.js"></script>
 
 </body>
 </html>

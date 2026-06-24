@@ -6,6 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 @RestController
 @RequestMapping("/api/potholes")
 public class PotholeController {
@@ -99,6 +104,41 @@ public class PotholeController {
     @GetMapping("/top")
     public List<Pothole> getTopPotholes() {
         return potholeRepository.findAllByOrderByVotesDesc();
+    }
+
+    @PostMapping("/upload")
+    public String uploadImage(
+            @RequestParam("file") MultipartFile file
+    ) {
+
+        try {
+
+            String fileName =
+                    System.currentTimeMillis()
+                            + "_"
+                            + file.getOriginalFilename();
+
+            Path uploadPath =
+                    Paths.get("uploads/potholes");
+
+            Files.createDirectories(uploadPath);
+
+            Path filePath =
+                    uploadPath.resolve(fileName);
+
+            Files.write(
+                    filePath,
+                    file.getBytes()
+            );
+
+            return fileName;
+
+        } catch (Exception e) {
+
+            return "Upload Failed";
+
+        }
+
     }
 
 }

@@ -25,4 +25,6 @@ public class Pothole {
 
     private int votes;
 
+    private String imageUrl;
+
 }
